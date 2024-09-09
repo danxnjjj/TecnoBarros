@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecnoBarros - A.I. de Aprendizado</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=San+Francisco:wght@400;600&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header com a logo da TecnoBarros -->
+    <header>
+        <img src="Photoroom-20240825_192522.png" alt="Logo TecnoBarros">
+    </header>
+
+    <!-- Main content -->
+    <main class="login-container" role="main">
+        <section class="login-box">
+            <h1>TecnoBarros</h1>
+            <!-- Formulário de login -->
+            <form id="loginForm">
+                <input type="text" id="codigoSala" placeholder="Código da sala" aria-label="Código da Sala">
+                <button type="submit" id="entrarBtn" data-section="subjects-section">Entrar</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Subjects Section (aparece após login) -->
+    <section id="subjects-section" class="subjects" aria-labelledby="subjectsHeading" style="display:none;">
+        <h2 id="subjectsHeading">Melhore seus estudos com a TecnoBarros</h2>
+        <div class="subject-grid">
+            <div class="subject-item" tabindex="0">Português</div>
+            <div class="subject-item" tabindex="0">Matemática</div>
+            <div class="subject-item" tabindex="0">Física</div>
+            <div class="subject-item" tabindex="0">Química</div>
+            <div class="subject-item" tabindex="0">Empreendedorismo</div>
+            <div class="subject-item" tabindex="0">Biologia</div>
+            <div class="subject-item" tabindex="0">Inglês</div>
+            <div class="subject-item" tabindex="0">Projeto de Vida</div>
+            <div class="subject-item" tabindex="0">Redação</div>
+            <div class="subject-item" tabindex="0">Educação Financeira</div>
+            <div class="subject-item" tabindex="0">Biotecnologia</div>
+            <div class="subject-item" tabindex="0">História</div>
+            <div class="subject-item" tabindex="0">Geografia</div>
+            <div class="subject-item" tabindex="0">Sociologia</div>
+        </div>
+    </section>
+
+    <!-- Nova seção para vídeos e pesquisa por data -->
+    <section id="additional-content" class="additional-content" style="display: none;">
+        <div class="date-search" id="dateSearchSection">
+            <h2>Pesquisar conteúdo por data:</h2>
+            <input type="date" id="datePicker" name="datePicker">
+            <button id="searchDateBtn">Pesquisar</button>
+        </div>
+
+        <div class="video-section" id="videoSection">
+            <h2>Conteúdos recomendados sobre <span id="selectedSubject"></span></h2>
+            <div id="youtubeVideos" class="video-grid"></div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Lógica para a transição do login
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            const codigo = document.getElementById('codigoSala').value;
+            if (codigo) {
+                // Animação fade-out para a tela de login
+                document.querySelector('.login-container').classList.add('fade-out');
+
+                setTimeout(() => {
+                    // Esconder a tela de login e mostrar a seção de matérias
+                    document.querySelector('.login-container').style.display = 'none';
+                    const subjectsSection = document.getElementById('subjects-section');
+                    subjectsSection.style.display = 'block';
+                    subjectsSection.classList.add('fade-in');
+                }, 500); // Tempo da animação em milissegundos
+            }
+        });
+
+        // Lógica para exibir a seção de vídeos e pesquisa por data ao clicar em uma matéria
+        document.querySelectorAll('.subject-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const selectedSubject = this.textContent;
+                document.getElementById('selectedSubject').textContent = selectedSubject;
+
+                // Mostrar a nova seção
+                document.getElementById('additional-content').style.display = 'block';
+
+                // Aqui você pode adicionar a lógica para buscar vídeos do YouTube relacionados à matéria
+                // Por exemplo, usando a API do YouTube
+            });
+        });
+    </script>
+</body>
+</html>
